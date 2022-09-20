@@ -16,15 +16,15 @@ function setup() {
 }
 
 function draw() {
-
+    
     for (i=0;i<recs.length;i++) {
-        rec.spiral()
-        rec.display()
+        recs[i].spiral()
+        recs[i].display()
     }
     
     if (mouseIsPressed) {
         rec = new Rectangle(mouseX,mouseY,15,15)
-        recs.push(rec)        
+        recs.push(rec)      
     }
 
 }
@@ -54,17 +54,7 @@ class Rectangle{
         angle += speed;
         scalar += speed;
       }
-
-    reset() {
-        this.x = mouseX
-        this.y = mouseY
-    }
     
-}
-
-function mousePressed() {
-    pressed = true
-    return pressed
 }
 
 // keyValue = 0
