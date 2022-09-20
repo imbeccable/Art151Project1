@@ -1,14 +1,17 @@
 let value = 0;
 var angle = 2.0;
 var scalar = 3.5;
+var offset = 300;
 var speed = 2;
+let cnv
 recs = []
+stillrecs = []
 var col = {
     r: 255,
     g: 0,
     b: 0
 };
-let pressed = false;
+//let pressed = false;
 
 function setup() {
     createCanvas(windowWidth,windowHeight)
@@ -17,15 +20,26 @@ function setup() {
 
 function draw() {
     
-    for (i=0;i<recs.length;i++) {
-        recs[i].spiral()
-        recs[i].display()
-    }
     
-    if (mouseIsPressed) {
+    if (mousePressed()) {
         rec = new Rectangle(mouseX,mouseY,15,15)
-        recs.push(rec)      
+        rec.display()
+        rec.mouseClicked()
     }
+    // for(i=0;i<stillrecs.length;i++) {
+    //     stillrecs[i].display();
+    // }
+
+    // for (i=0;i<recs.length;i++) {
+        
+    //     rec.spiral()
+    //     rec.display()
+    // }
+    
+    // if (mouseIsPressed) {
+    //     rec = new Rectangle(mouseX,mouseY,15,15)
+    //     recs.push(rec)
+    // }
 
 }
 
@@ -37,25 +51,52 @@ class Rectangle{
         this.height = height;
     }
 
-    display() {        
+    display() {    
+        col.r = random(0, 200);
+        col.g = random(0, 250);
+        col.b = random(100, 250); 
+        fill(col.r, col.g, col.b);   
         rect(this.x,this.y,this.width,this.height)
     }
 
-    spiral() {
-        col.r = random(0, 200);
-        col.g = random(0, 250);
-        col.b = random(100, 250);
-        this.x += cos(angle) * scalar;
-        this.y += sin(angle) * scalar;
-        fill(col.r, col.g, col.b);
-        noStroke();
-        // rec = new Rectangle(newx, newy, 15, 15);
-        // rec.display()
+    mouseClicked() {
+        var x = offset + cos(angle) * scalar;
+        var y = offset + sin(angle) * scalar;
+        ellipse(x, y, 5, 5);
         angle += speed;
         scalar += speed;
-      }
+        return false
+    }
+
+    // spiral() {        
+    //     this.x += cos(angle) * scalar;
+    //     this.y += sin(angle) * scalar;
+    //     noStroke();
+    //     angle += speed;
+    //     scalar += speed;
+    //   }   
     
 }
+
+// function mouseClicked() {
+//     var x = offset + cos(angle) * scalar;
+//     var y = offset + sin(angle) * scalar;
+//     ellipse(x, y, 5, 5);
+//     angle += speed;
+//     scalar += speed;
+//     return false
+// }
+
+function mousePressed() {
+    
+}
+
+// function mouseReleased() {
+//     for (i=0;i<recs.length;i++) {
+//         stillrecs.push(recs[i]);
+//     }
+//     recs = []
+// }
 
 // keyValue = 0
 // function keyPressed() {
