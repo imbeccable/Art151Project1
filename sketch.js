@@ -16,6 +16,7 @@ class Block {
       this.height = height;
       this.speedx = speedx;
       this.speedy = speedy;
+      this.origin = x;
     }
 
     display() {
@@ -27,29 +28,22 @@ class Block {
     }
 
     move() {
-        this.x += this.speedx;
-        if (this.x > windowWidth - this.width || this.x < 0) {
-            this.speedx *= -1;
-        }
+        this.x += this.speedx;        
         this.y += this.speedy;
+
+        if (this.origin < windowWidth / 2) {
+            if (this.x > (windowWidth/2) - this.width || this.x < 0) {
+                this.speedx *= -1;
+            } 
+        } else {
+            if (this.x < windowWidth/2 || this.x > windowWidth - this.width) {
+                this.speedx *= -1;
+            }
+
+        }
         if (this.y > windowHeight - this.height || this.y < 0) {
             this.speedy *= -1;
         }        
-    }   
-    
-    // scaling() {
-    //     if (this.x < 5) {
-    //         scale(2)
-    //     }
-    //     if (this.x > 200) {
-    //         scale(-2)
-    //     }
-    //     if (this.y < 5) {
-    //         scale(0,2)
-    //     }
-    //     if (this.y > 200) {
-    //         scale(0,-2)
-    //     }
     }
   }
 
@@ -85,7 +79,13 @@ function setup() {
   }
   
 function draw() { 
-    background(c1,c2,c3)
+    fill(c1,c2,c3);
+    noStroke()
+    rect(0,0,windowWidth/2,windowHeight);
+    fill(c2,c2,c3)
+    noStroke()
+    rect(windowWidth/2,0,windowWidth,windowHeight);
+    strokeWeight(5)
 
     if (mouseClicked()) {
         if (mouseX > windowWidth/2 && mouseY < windowHeight/2){
@@ -106,7 +106,6 @@ function draw() {
     for (i;i<blocks.length;i++) {
         blocks[i].display();
         blocks[i].move();
-        //blocks[i].scaling();
     }
     
     if (keyCode == 27){
