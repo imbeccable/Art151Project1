@@ -75,17 +75,12 @@ function changeBackground3() {
 }
 
 function setup() {
-    createCanvas(windowWidth, windowHeight);    
+    createCanvas(windowWidth, windowHeight);  
+    background(0)  
   }
   
 function draw() { 
-    fill(c1,c2,c3);
-    noStroke()
-    rect(0,0,windowWidth/2,windowHeight);
-    fill(c2,c2,c3)
-    noStroke()
-    rect(windowWidth/2,0,windowWidth,windowHeight);
-    strokeWeight(5)
+    
 
     if (mouseClicked()) {
         if (mouseX > windowWidth/2 && mouseY < windowHeight/2){
@@ -109,11 +104,16 @@ function draw() {
     }
     
     if (keyCode == 27){
+        background(0)
         reset();
         keyCode = 0;
     }
 
     if (keyCode == 13) {
+        fill(c1,c2,c3);
+        rect(0,0,windowWidth/2,windowHeight);
+        fill(c2,c2,c3)
+        rect(windowWidth/2,0,windowWidth,windowHeight);
         c1 = changeBackground1();
         c2 = changeBackground2();
         c3 = changeBackground3();
